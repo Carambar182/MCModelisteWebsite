@@ -40,10 +40,11 @@ aucune modification du HTML n'est nécessaire.
 Pensez à mettre à jour l'attribut `alt` de chaque image dans `index.html` pour
 décrire la vraie photo.
 
-## Ajouter un e-mail ou un téléphone
+## Coordonnées
 
-Dans `index.html`, section `contact` : un bloc commenté est prêt à l'emploi. Le
-décommenter et remplacer l'adresse et le numéro.
+E-mail et téléphone apparaissent à trois endroits : la section `contact` de
+`index.html`, le bloc `application/ld+json` en haut de ce même fichier, et
+`mentions-legales.html`. Les trois doivent rester cohérents.
 
 ## Mentions légales
 
