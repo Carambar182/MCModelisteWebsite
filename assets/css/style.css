@@ -17,6 +17,12 @@
   --shadow:     0 18px 50px rgba(73, 54, 27, .13);
   --veil:       rgba(255, 243, 223, .55);
   --img-filter: none;
+  --logo-filter: none;
+
+  --cell-veil-dark:      rgba(41, 30, 15, .58);
+  --cell-veil-light:     rgba(255, 243, 223, .58);
+  --cell-ink-light:      #3A2A14;
+  --cell-ink-soft-light: #5C4726;
 
   --nav-h: 72px;
   --wrap: 1280px;
@@ -30,8 +36,11 @@
   color-scheme: light dark;
 }
 
+/* Le thème sombre est défini une seule fois, puis appliqué dans les trois cas :
+   réglage système, choix explicite « sombre », et jamais quand « clair » est
+   explicitement demandé. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --paper:      #211710;
     --paper-2:    #2A1E14;
     --paper-3:    #33251a;
@@ -43,7 +52,33 @@
     --shadow:     0 18px 50px rgba(0, 0, 0, .45);
     --veil:       rgba(33, 23, 16, .88);
     --img-filter: brightness(.78) saturate(.92);
+    --logo-filter: brightness(0) invert(1) opacity(.92);
+
+    --cell-veil-dark:      rgba(20, 13, 8, .70);
+    --cell-veil-light:     rgba(33, 23, 16, .82);
+    --cell-ink-light:      #F5E7CF;
+    --cell-ink-soft-light: #D8C4A3;
   }
+}
+
+:root[data-theme="dark"] {
+  --paper:      #211710;
+  --paper-2:    #2A1E14;
+  --paper-3:    #33251a;
+  --ink:        #F5E7CF;
+  --ink-soft:   #D8C4A3;
+  --ink-mute:   #AE9877;
+  --line:       rgba(245, 231, 207, .20);
+  --line-soft:  rgba(245, 231, 207, .10);
+  --shadow:     0 18px 50px rgba(0, 0, 0, .45);
+  --veil:       rgba(33, 23, 16, .88);
+  --img-filter: brightness(.78) saturate(.92);
+  --logo-filter: brightness(0) invert(1) opacity(.92);
+
+  --cell-veil-dark:      rgba(20, 13, 8, .70);
+  --cell-veil-light:     rgba(33, 23, 16, .82);
+  --cell-ink-light:      #F5E7CF;
+  --cell-ink-soft-light: #D8C4A3;
 }
 
 /* --------------------------------------------------------- base --------- */
@@ -204,7 +239,7 @@ a { color: inherit; }
 
 .site-header {
   position: sticky;
-  top: 0;
+  top: env(safe-area-inset-top, 0px);
   z-index: 50;
   background: color-mix(in srgb, var(--paper) 88%, transparent);
   backdrop-filter: blur(14px);
@@ -232,10 +267,8 @@ a { color: inherit; }
   width: auto;
 }
 
-@media (prefers-color-scheme: dark) {
-  .brand img,
-  .site-footer__brand img { filter: brightness(0) invert(1) opacity(.92); }
-}
+.brand img,
+.site-footer__brand img { filter: var(--logo-filter); }
 
 .site-nav { display: flex; align-items: center; gap: clamp(1.25rem, 2.6vw, 2.4rem); }
 
@@ -414,25 +447,16 @@ a { color: inherit; }
 
 .bento__cell--dark {
   background-image: url("../img/service-patronage.jpg");
-  --cell-veil: rgba(41, 30, 15, .58);
+  --cell-veil: var(--cell-veil-dark);
   --cell-ink: #FDF4E5;
   --cell-ink-soft: #E7D6B9;
 }
 
 .bento__cell--light {
   background-image: url("../img/service-prototype.jpg");
-  --cell-veil: rgba(255, 243, 223, .58);
-  --cell-ink: #3A2A14;
-  --cell-ink-soft: #5C4726;
-}
-
-@media (prefers-color-scheme: dark) {
-  .bento__cell--dark  { --cell-veil: rgba(20, 13, 8, .70); }
-  .bento__cell--light {
-    --cell-veil: rgba(33, 23, 16, .82);
-    --cell-ink: var(--ink);
-    --cell-ink-soft: var(--ink-soft);
-  }
+  --cell-veil: var(--cell-veil-light);
+  --cell-ink: var(--cell-ink-light);
+  --cell-ink-soft: var(--cell-ink-soft-light);
 }
 
 .bento__cell--full {
