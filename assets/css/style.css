@@ -19,7 +19,9 @@
   --logo-filter: none;
 
   --cell-veil-dark:      rgba(41, 30, 15, .58);
-  --cell-veil-light:     rgba(255, 243, 223, .58);
+  --cell-veil-light:     rgba(255, 243, 223, .40);
+  --cell-scrim-on-dark:  rgba(25, 17, 8, .55);
+  --cell-scrim-on-light: rgba(255, 243, 223, .62);
   --cell-ink-light:      #3A2A14;
   --cell-ink-soft-light: #5C4726;
 
@@ -54,6 +56,8 @@
 
     --cell-veil-dark:      rgba(20, 13, 8, .70);
     --cell-veil-light:     rgba(33, 23, 16, .82);
+    --cell-scrim-on-dark:  rgba(10, 7, 3, .58);
+    --cell-scrim-on-light: rgba(18, 12, 7, .60);
     --cell-ink-light:      #F5E7CF;
     --cell-ink-soft-light: #D8C4A3;
   }
@@ -74,6 +78,8 @@
 
   --cell-veil-dark:      rgba(20, 13, 8, .70);
   --cell-veil-light:     rgba(33, 23, 16, .82);
+  --cell-scrim-on-dark:  rgba(10, 7, 3, .58);
+  --cell-scrim-on-light: rgba(18, 12, 7, .60);
   --cell-ink-light:      #F5E7CF;
   --cell-ink-soft-light: #D8C4A3;
 }
@@ -427,33 +433,40 @@ a { color: inherit; }
 .bento__cell h3 { color: var(--cell-ink, var(--ink)); }
 .bento__cell p  { color: var(--cell-ink-soft, var(--ink-soft)); font-weight: 300; }
 
-.bento__cell--dark,
-.bento__cell--light {
+.bento__cell--photo {
   background-size: cover;
   background-position: center;
 }
 
-.bento__cell--dark::before,
-.bento__cell--light::before {
+/* Deux couches : un voile uniforme qui tient la tuile dans le thème, et un
+   dégradé vers le bas, là où se trouve le texte. Sans lui, un reflet clair de
+   la photo passant sous une ligne suffit à la rendre illisible. */
+.bento__cell--photo::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--cell-veil);
+  background:
+    linear-gradient(to top, var(--cell-scrim), transparent 62%),
+    var(--cell-veil);
 }
 
-.bento__cell--dark {
+/* Photo claire (les patrons suspendus) : voile clair, encre brune. */
+.bento__cell--patronage {
   background-image: url("../img/service-patronage.jpg");
-  --cell-veil: var(--cell-veil-dark);
-  --cell-ink: #FDF4E5;
-  --cell-ink-soft: #E7D6B9;
-}
-
-.bento__cell--light {
-  background-image: url("../img/service-prototype.jpg");
   --cell-veil: var(--cell-veil-light);
+  --cell-scrim: var(--cell-scrim-on-light);
   --cell-ink: var(--cell-ink-light);
   --cell-ink-soft: var(--cell-ink-soft-light);
+}
+
+/* Photo sombre (la machine à coudre) : voile sombre, encre crème. */
+.bento__cell--machine {
+  background-image: url("../img/service-atelier.jpg");
+  --cell-veil: var(--cell-veil-dark);
+  --cell-scrim: var(--cell-scrim-on-dark);
+  --cell-ink: #FDF4E5;
+  --cell-ink-soft: #E7D6B9;
 }
 
 .bento__cell--full {

@@ -22,22 +22,38 @@ Sur GitHub : **Settings → Pages → Source : Deploy from a branch**, puis bran
 Pour un nom de domaine personnalisé, l'ajouter dans le même écran et créer un
 fichier `CNAME` à la racine.
 
-## Remplacer les visuels
+## Les visuels
 
-Les images de `assets/img/` sont des textures provisoires, pas des photos de
-l'atelier. Pour les remplacer, déposer vos photos **avec le même nom de fichier** :
-aucune modification du HTML n'est nécessaire.
+| Fichier | Emplacement | Source | Format |
+|---|---|---|---|
+| `hero.jpg` | haut de page | Evi Kalemi | portrait 4:5, 1400 x 1750 px |
+| `service-patronage.jpg` | tuile « Modélisme » | Caroline Badran | paysage 7:5, 1400 x 1000 px |
+| `service-atelier.jpg` | tuile « Atelier de production » | J. Williams | paysage 7:5, 1400 x 1000 px |
+| `cours.jpg` | section « Cours » | Darling Arias | paysage 4:3, 1400 x 1050 px |
+| `atelier.jpg` | bande « L'atelier » | **texture provisoire** | paysage 16:10, ~1800 x 1125 px |
 
-| Fichier | Emplacement | Format conseillé |
-|---|---|---|
-| `hero.jpg` | haut de page | portrait 4:5, ~1100 x 1375 px |
-| `atelier.jpg` | bande « L'atelier » | paysage 16:10, ~1800 x 1125 px |
-| `cours.jpg` | section « Cours » | paysage 4:3, ~1400 x 1050 px |
-| `service-patronage.jpg` | tuile « Modélisme » | paysage, ~900 x 700 px, plutôt sombre |
-| `service-prototype.jpg` | tuile « Atelier de production » | paysage, ~900 x 700 px, plutôt clair |
+Seule `atelier.jpg` reste une texture calculée, faute de photo pour cet
+emplacement. Pour la remplacer, déposer une photo **sous le même nom** : aucune
+modification du HTML n'est nécessaire, le CSS recadre automatiquement.
 
-Pensez à mettre à jour l'attribut `alt` de chaque image dans `index.html` pour
-décrire la vraie photo.
+Les originaux non recadrés sont à la racine du dépôt (`*-unsplash.jpg`). Ils ne
+sont pas utilisés par le site et peuvent être déplacés ou supprimés ; ils servent
+seulement à refaire un recadrage. Le script de recadrage est décrit dans
+l'historique Git.
+
+Après tout changement d'image, mettre à jour son attribut `alt` dans
+`index.html` pour décrire la nouvelle photo.
+
+### Traitement des tuiles de services
+
+Les deux tuiles à photo posent leur texte sur l'image. Chacune porte donc une
+classe de traitement, à choisir selon la photo :
+
+- `bento__cell--patronage` : voile clair et encre brune, pour une photo claire
+- `bento__cell--machine` : voile sombre et encre crème, pour une photo sombre
+
+Un dégradé s'ajoute au bas de chaque tuile, sous le texte : un simple voile
+uniforme ne suffit pas quand un reflet clair de la photo passe sous une ligne.
 
 ## Photos du portfolio
 
