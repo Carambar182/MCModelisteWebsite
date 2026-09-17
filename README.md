@@ -35,10 +35,24 @@ aucune modification du HTML n'est nécessaire.
 | `cours.jpg` | section « Cours » | paysage 4:3, ~1400 x 1050 px |
 | `service-patronage.jpg` | tuile « Modélisme » | paysage, ~900 x 700 px, plutôt sombre |
 | `service-prototype.jpg` | tuile « Atelier de production » | paysage, ~900 x 700 px, plutôt clair |
-| `portfolio.jpg` | fond de la bande « Portfolio » | paysage 3:2, ~1600 x 1067 px |
 
 Pensez à mettre à jour l'attribut `alt` de chaque image dans `index.html` pour
 décrire la vraie photo.
+
+## Photos du portfolio
+
+`assets/img/portfolio/` contient les modèles découpés depuis la planche
+`MCmodéliste-Portfolio.jpg`, recadrés au contenu : les aplats de la mise en page
+imprimée ne sont pas repris. Les fichiers sont nommés par domaine
+(`sport-`, `pap-`, `med-`).
+
+Ce sont de vraies photos, mais en basse définition : la planche d'origine ne fait
+que 4322 x 775 px, donc chaque modèle mesure environ 100 à 240 px de large. Elles
+sont affichées à leur taille native et ne doivent pas être agrandies. Si vous
+disposez des fichiers d'origine, remplacez-les pour un rendu net sur écran retina.
+
+Pour ajouter un modèle : déposer l'image dans ce dossier, puis l'ajouter dans le
+bloc `.pf-photos` du domaine concerné, dans `index.html`.
 
 ## Coordonnées
 
